@@ -14,8 +14,7 @@ A FastAPI-based REST API that seamlessly integrates with Google's Gemini AI mode
 
 - Python 3.x
 - FastAPI
-- Pydantic
-- python-dotenv
+- dotenv
 - requests
 
 ## Setup
@@ -29,7 +28,7 @@ python -m venv venv
 
 3. Install dependencies:
 ```bash
-pip install fastapi python-dotenv requests uvicorn pydantic
+pip install fastapi dotenv requests uvicorn
 ```
 
 4. Create a `.env` file in the root directory and add your Gemini API key:
