@@ -1,6 +1,6 @@
 # ⚡FastAPI Gemini AI Integration
 
-A FastAPI-based REST API that integrates with Google's Gemini AI model to generate content.
+A FastAPI-based REST API that seamlessly integrates with Google's Gemini AI model for content generation.
 
 ## Features
 
@@ -8,6 +8,7 @@ A FastAPI-based REST API that integrates with Google's Gemini AI model to genera
 - Gemini AI content generation endpoint
 - Environment variable configuration for API keys
 - Request/Response model validation using Pydantic
+- Built-in error handling and validation
 
 ## Prerequisites
 
@@ -20,11 +21,18 @@ A FastAPI-based REST API that integrates with Google's Gemini AI model to genera
 ## Setup
 
 1. Clone the repository
-2. Install dependencies (Inside a virtual environment preferably):
+2. Create and activate a virtual environment (recommended):
 ```bash
-pip install fastapi dotenv requests uvicorn
+python -m venv venv
+.\venv\Scripts\activate
 ```
-3. Create a `.env` file in the root directory and add your Gemini API key:
+
+3. Install dependencies:
+```bash
+pip install fastapi python-dotenv requests uvicorn pydantic
+```
+
+4. Create a `.env` file in the root directory and add your Gemini API key:
 ```
 GEMINI_API_KEY=your_api_key_here
 ```
@@ -37,22 +45,24 @@ Start the server using uvicorn:
 uvicorn main:app --reload
 ```
 
+The API will be available at `http://localhost:8000`
+
 ## API Endpoints
 
-### GET /
+### GET / 
 - Query Parameters:
-  - published (optional, boolean, default=True)
-  - limit (optional, integer, default=10)
-- Returns a welcome message
+  - `published` (optional, boolean, default=True)
+  - `limit` (optional, integer, default=10)
+- Returns a welcome message with configurable display options
 
 ### GET /about/{id}
 - Path Parameters:
-  - id (integer)
-- Returns a welcome message with the provided ID
+  - `id` (integer)
+- Returns a personalized welcome message with the provided ID
 
 ### POST /generate
 - Generates content using Gemini AI
-- Request Body:
+- Request Body Schema:
 ```json
 {
     "contents": [
@@ -69,12 +79,23 @@ uvicorn main:app --reload
 
 ## Error Handling
 
-The application includes basic error handling for:
+The application includes robust error handling for:
 - Missing API keys
 - Failed API requests
 - Invalid request formats
+- Server-side errors
 
 ## Security Notes
 
-- Keep your Gemini API key secure
-- Never commit the `.env` file to version control
+- Never expose your Gemini API key in your code
+- Add `.env` to your `.gitignore` file
+- Use environment variables for all sensitive data
+
+## Project Structure
+
+```
+├── main.py           # FastAPI application and route handlers
+├── schemas.py        # Pydantic models for request/response validation
+├── .env             # Environment variables (create this file)
+└── README.md        # Project documentation
+```
