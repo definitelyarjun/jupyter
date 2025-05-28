@@ -1,4 +1,4 @@
-# FastAPI Gemini AI Integration
+# ⚡FastAPI Gemini AI Integration
 
 A FastAPI-based REST API that integrates with Google's Gemini AI model to generate content.
 
